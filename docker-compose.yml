@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  penrose-tiles:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: penrose_tiles_app
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    networks:
+      - penrose-network
+
+networks:
+  penrose-network:
+    driver: bridge
