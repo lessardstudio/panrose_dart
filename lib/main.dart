@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'types.dart';
 import 'options_frame.dart';
 import 'penrose_tiles_painter.dart';
+import 'tile_info_panel.dart';
 
 void main() {
   runApp(const PenroseTilesApp());
@@ -34,6 +35,7 @@ class PenroseTilesHomePage extends StatefulWidget {
 
 class _PenroseTilesHomePageState extends State<PenroseTilesHomePage> {
   late DrawOptions options;
+  TileInfo? tileInfo;
 
   @override
   void initState() {
@@ -64,6 +66,12 @@ class _PenroseTilesHomePageState extends State<PenroseTilesHomePage> {
     });
   }
 
+  void _updateTileInfo(TileInfo info) {
+    setState(() {
+      tileInfo = info;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +79,7 @@ class _PenroseTilesHomePageState extends State<PenroseTilesHomePage> {
         children: [
           // Canvas for drawing Penrose tiles
           CustomPaint(
-            painter: PenroseTilesPainter(options),
+            painter: PenroseTilesPainter(options, onTileInfoCalculated: _updateTileInfo),
             size: Size.infinite,
             child: Container(),
           ),
@@ -79,6 +87,11 @@ class _PenroseTilesHomePageState extends State<PenroseTilesHomePage> {
           OptionsFrame(
             options: options,
             onChanged: _handleOptionsChanged,
+          ),
+          // Tile info panel
+          TileInfoPanel(
+            tileInfo: tileInfo,
+            options: options,
           ),
         ],
       ),

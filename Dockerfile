@@ -14,6 +14,7 @@ COPY lib/complex2.dart ./lib/
 COPY lib/penrose_tiles.dart ./lib/
 COPY lib/penrose_tiles_painter.dart ./lib/
 COPY lib/options_frame.dart ./lib/
+COPY lib/tile_info_panel.dart ./lib/
 
 # Копируем web файлы
 COPY web/index.html ./web/
